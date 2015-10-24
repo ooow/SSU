@@ -1,0 +1,13 @@
+﻿Сборка начата 11.10.2015 21:20:30.
+     1>Проект "D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_6_Progonka\mv_6_Progonka\mv_6_Progonka.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt mv_6_Progonka.cpp
+         mv_6_Progonka.cpp
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_6_Progonka\Debug\mv_6_Progonka.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_6_Progonka\Debug\mv_6_Progonka.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_6_Progonka\Debug\mv_6_Progonka.lib" /MACHINE:X86 Debug\mv_6_Progonka.obj
+         mv_6_Progonka.vcxproj -> D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_6_Progonka\Debug\mv_6_Progonka.exe
+     1>Сборка проекта "D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_6_Progonka\mv_6_Progonka\mv_6_Progonka.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:03.77

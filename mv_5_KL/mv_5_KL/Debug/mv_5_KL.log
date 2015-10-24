@@ -1,0 +1,13 @@
+﻿Сборка начата 15.10.2015 15:19:38.
+     1>Проект "D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_5_KL\mv_5_KL\mv_5_KL.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt mv_5_KL.cpp
+         mv_5_KL.cpp
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_5_KL\Debug\mv_5_KL.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_5_KL\Debug\mv_5_KL.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_5_KL\Debug\mv_5_KL.lib" /MACHINE:X86 Debug\mv_5_KL.obj
+         mv_5_KL.vcxproj -> D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_5_KL\Debug\mv_5_KL.exe
+     1>Сборка проекта "D:\Users\Гога\Documents\Visual Studio 2013\Projects\mv_5_KL\mv_5_KL\mv_5_KL.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:03.46
