@@ -20,10 +20,10 @@ in C++
 
 in Java
 
---Numerical integration of the rectangle formula (...)
+--Numerical integration of the rectangle formula (mv_8_CHIP)
 
---Numerical integration of the trapezoid formula (...)
+--Numerical integration of the trapezoid formula (mv_9_CHIT)
 
---Numerical integration by Simpson's formula (...)
+--Numerical integration by Simpson's formula (mv_10_CHIS)
 
---The length of the ellipse (...)
+--The length of the ellipse (mv_11_DEl)
