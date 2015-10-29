@@ -1,0 +1,115 @@
+1
+Carrie
+Stiven King
+1974
+490
+1
+2
+Fifty Shades of Grey
+E. L. James
+2011
+1190
+8
+3
+Starting Out with C++: Early Objects
+Tony Gaddis, Judy Walters, Godfrey Muganda
+2013
+700
+2
+#
+4
+Fifty Shades of Grey
+E. L. James
+2011
+1190
+6
+5
+Starting Out with C++: Early Objects
+Tony Gaddis, Judy Walters, Godfrey Muganda
+2013
+700
+1
+6
+War and Peace
+Leo Tolstoy
+1869
+1420
+4
+8
+Carrie
+Stiven King
+1974
+490
+3
+#
+9
+Fifty Shades of Grey
+E. L. James
+2011
+1190
+1
+10
+Problem Solving with C++
+Savitch W.
+2009
+870
+3
+11
+War and Peace
+Leo Tolstoy
+1869
+1420
+7
+#
+12
+Carrie
+Stiven King
+1974
+490
+14
+13
+Fifty Shades of Grey
+E. L. James
+2011
+1190
+23
+14
+Starting Out with C++: Early Objects
+Tony Gaddis, Judy Walters, Godfrey Muganda
+2013
+700
+9
+15
+Problem Solving with C++
+Savitch W.
+2009
+870
+11
+16
+War and Peace
+Leo Tolstoy
+1869
+1420
+17
+#
+18
+Carrie
+Stiven King
+1974
+490
+1
+19
+Problem Solving with C++
+Savitch W.
+2009
+870
+4
+20
+War and Peace
+Leo Tolstoy
+1869
+1420
+5
+#
+
+
