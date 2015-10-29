@@ -28,11 +28,15 @@ public class mv_8_CHIP {
     {
         out = new PrintWriter(new BufferedOutputStream(new FileOutputStream("output.txt")));
         double ans = 0;
+        double di = (Math.sin(B + Math.PI * A)/ A) - Math.sin(B) / A;
+
         for (int i = 1; i < n; i ++)
         {
             ans += (mx[i] - mx[i - 1]) * Math.cos (A * ((mx[i - 1] + mx[i]) / 2) + B);
         }
-        out.println(ans);
+
+        out.println("CHIP  " + ans);
+        out.println("Integral  " + di);
         out.close();
     }
 
