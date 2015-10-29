@@ -1,0 +1,1 @@
+bool newclip(point &a, point &b, polygon^ P) ;
