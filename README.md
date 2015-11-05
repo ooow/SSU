@@ -17,3 +17,5 @@ in Java
 * Numerical integration of the trapezoid formula (mv_9_CHIT)
 * Numerical integration by Simpson's formula (mv_10_CHIS)
 * The length of the ellipse (mv_11_DEl)
+* The system with the lower triangular matrix (mv_12_SNTM)
+* Gauss method with a choice of the main element (mv_13_Gauss)
