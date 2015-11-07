@@ -30,8 +30,8 @@ module Lab4(
   , mLet
   , ifEq
   , mMap
-  --, mMapAddN
-  --, fact
+  , mMapAddN
+  , fact
   )
   where
 --------------------------------------------------------------------------------
@@ -59,51 +59,31 @@ valOfIntNum e          = error $ "The expression "
                                  ++ " is not a number"
 --------------------------------------------------------------------------------
 -- Задание 1 funName 
-funName (Fun name x y) = name
-funName e              = error $ "The expression " 
-                                 ++ show (e) 
-                                 ++ " The expression e is not a function"
+funName (Fun name _ _) = name
+funName e = error $ "The expression " ++ show (e) ++ " is not a function"
 -- Задание 2 funArg 
-funArg (Fun name x y) = x
-funArg e              = error $ "The expression " 
-                                 ++ show (e) 
-                                 ++ " The expression e is not a function"
+funArg (Fun _ arg _) = arg
+funArg e = error $ "The expression " ++ show (e) ++ " is not a function"
 -- Задание 3 funBody 
-funBody (Fun name x y) = y
-funBody e              = error $ "The expression " 
-                                 ++ show (e) 
-                                 ++ " The expression e is not a function"
+funBody (Fun _ _ body) = body
+funBody e = error $ "The expression " ++ show (e) ++ " is not a function"
 -- Задание 4 pairHead 
-pairHead (Pair a b) = a
-pairHead e              = error $ "The expression " 
-                                 ++ show (e) 
-                                 ++ " The expression e is not a pair"
+pairHead (Pair e1 _) = e1
+pairHead e = error $ "The expression " ++ show (e) ++ " is not a pair"
 -- Задание 5 pairTail 
-pairTail (Pair a b) = b
-pairTail e          = error $ "The expression " 
-                                 ++ show (e) 
-                                 ++ " The expression e is not a pair"
+pairTail (Pair _ e2) = e2
+pairTail e = error $ "The expression " ++ show (e) ++ " is not a pair"
 -- Задание 6 closureFun 
-closureFun (Closure l fun) = fun
-closureFun e                          = error $ "The expression " 
-                                        ++ show (e) 
-                                        ++ "The expression e is not a closure"
+closureFun (Closure _ f) = f
+closureFun e = error $ "The expression " ++ show (e) ++ " is not a closure"
 -- Задание 7 closureEnv 
-closureEnv (Closure l fun) = l
-closureEvn e                          = error $ "The expression " 
-                                        ++ show (e) 
-                                        ++ "The expression e is not a closure"
+closureEnv (Closure env _) = env
+closureEnv e = error $ "The expression " ++ show (e) ++ " is not a closure"
 -- Задание 8 convertListToMUPL 
-convertListToMUPL [] = Unit
-convertListToMUPL [x] = Pair x Unit
---convertListToMUPL [ll, ls] = Pair ll ls
-convertListToMUPL l = Pair (head l) (convertListToMUPL (tail l))
+convertListToMUPL l = foldr Pair Unit l
 -- Задание 9 convertListFromMUPL 
 convertListFromMUPL Unit = []
-convertListFromMUPL (Pair x Unit) = [x]
---convertListFromMUPL (Pair x y) = [x, y]
-convertListFromMUPL (Pair x z) = x : convertListFromMUPL z
-
+convertListFromMUPL (Pair x xs) = x : convertListFromMUPL xs
 --------------------------------------------------------------------------------
 -- Вспомогательные определения
 -- нельзя вносить изменения в следующий блок
@@ -118,59 +98,92 @@ evalExp e = evalUnderEnv e []
 -- Задание 10 evalUnderEnv 
 -- Заданную строку определения изменять нельзя
 -- необходимо дополнить определение функции
-evalUnderEnv (Var name) env = envLookUp env name
-evalUnderEnv (IntNum x) env = IntNum x
-evalUnderEnv Unit env = Unit
---evalUnderEnv (Closure [] f) env = Closure [] f
-evalUnderEnv (Add a b) env = IntNum ((valOfIntNum (evalUnderEnv a env)) + 
-                             (valOfIntNum (evalUnderEnv b env)))
-evalUnderEnv (IfGreater e1 e2 e3 e4) env 
-           | (valOfIntNum (evalUnderEnv e1 env)) > 
-             (valOfIntNum (evalUnderEnv e2 env)) = evalUnderEnv e3 env
-           | otherwise                           = evalUnderEnv e4 env
-evalUnderEnv (Pair e1 e2) env = Pair (evalUnderEnv e1 env) (evalUnderEnv e2 env)
-evalUnderEnv (Head e) env = pairHead (evalUnderEnv e env)
-evalUnderEnv (Tail e) env = pairTail (evalUnderEnv e env)
-evalUnderEnv (IsAUnit e) env
-           | (evalUnderEnv e env) == Unit = IntNum 1
-           | otherwise                    = IntNum 0
-evalUnderEnv (Let (str, e1) e2) env =
-           evalUnderEnv e2 [(str, evalUnderEnv e1 env)]
-evalUnderEnv (Fun name arg e) env 
-        = Closure env (Fun name arg e)
-evalUnderEnv (Call e1 e2) env = 
-  let 
-    temp = evalUnderEnv e1 env
-    temp2 = evalUnderEnv e2 env
-    name = funName (closureFun temp)
-    env1 = if name == [] then []
-                else [(name, temp)]
-    env_new = env1 ++ [(funArg (closureFun temp), temp2)] ++ (closureEnv temp)
-  in 
-   evalUnderEnv (funBody (closureFun (evalUnderEnv (closureFun temp) env_new))) env_new
-
+evalUnderEnv (Add e1 e2) env             =
+  IntNum ((valOfIntNum (evalUnderEnv e1 env) )
+          + (valOfIntNum (evalUnderEnv e2 env) )
+         )
+evalUnderEnv (IfGreater e1 e2 e3 e4) env
+  | (valOfIntNum (evalUnderEnv e1 env) )
+    > (valOfIntNum (evalUnderEnv e2 env) ) = evalUnderEnv e3 env
+  | otherwise                           = evalUnderEnv e4 env
+evalUnderEnv (Pair e1 e2) env            =
+    Pair (evalUnderEnv e1 env) (evalUnderEnv e2 env)
+evalUnderEnv (Head e) env                = pairHead (evalUnderEnv e env)
+evalUnderEnv (Tail e) env                = pairTail (evalUnderEnv e env)
+evalUnderEnv (IsAUnit e) env             =
+  if evalUnderEnv e env == Unit
+    then IntNum 1
+    else IntNum 0
+evalUnderEnv (Let (str, e1) e2) env      =
+  evalUnderEnv e2 ( (str, evalUnderEnv e1 env) : env)
+evalUnderEnv (Fun name arg e) env        = Closure env (Fun name arg e)
+evalUnderEnv (Call e1 e2) env            =
+  let
+    v1          = evalUnderEnv e1 env
+    fun         = closureFun v1
+    name        = funName fun
+    envWithArg  = (funArg fun, evalUnderEnv e2 env) : (closureEnv v1)
+    completeEnv = if name /= []
+      then (name, v1) : envWithArg
+      else envWithArg
+  in
+    evalUnderEnv (funBody fun) completeEnv
+evalUnderEnv (Var name) env              = envLookUp env name
+evalUnderEnv (IntNum num) env            = IntNum num
+evalUnderEnv Unit env                    = Unit
+evalUnderEnv (Closure envC f) env        = Closure envC f
 --------------------------------------------------------------------------------
 -- Последующие решения связывают переменные Haskellа с выражениями на MUPL
 -- (определяют макросы языка MUPL)
-
 -- Задание 11 ifAUnit 
-ifAUnit e1 e2 e3 = IfGreater (IsAUnit e1) (IntNum 1) e3 e2
-
+ifAUnit e1 e2 e3 =
+  IfGreater (IsAUnit e1) (IntNum 0) e2 e3
 -- Задание 12 mLet 
-mLet [] e = e 
-mLet (l : ns) e = Let l (mLet ns e)
-
--- Задание 13 ifEq 
-ifEq e1 e2 e3 e4 = IfGreater e1 e2 e4 (IfGreater e2 e1 e4 e3)
-
--- Задание 14 mMap
-mMap = Fun "mMap" "fun" (Fun "" "pair" (ifAUnit (Var "pair") (Var "pair") 
-  (Pair (Call (Var "fun") (Head (Var "pair"))) 
-  (Call (Call mMap (Var "fun")) (Tail (Var "pair"))))))
-
+mLet [] e2 = e2
+mLet (x : xs) e2 = Let x (mLet xs e2)
+-- Задание 13 ifEq
+ifEq e1 e2 e3 e4 =
+  mLet [("_x", e1), ("_y", e2)]
+       (IfGreater (Var "_x") (Var "_y") 
+                  e4
+                  (IfGreater (Var "_y") (Var "_x")
+                             e4
+                             e3))
+-- Задание 14 mMap 
+mMap =
+  Fun "" "f"
+    (Fun "loop" "l"
+       (ifAUnit (Var "l")
+                Unit
+                (Pair (Call (Var "f")
+                            (Head (Var "l")))
+                      (Call (Var "loop")
+                            (Tail (Var "l"))))))
 -- Задание 15 mMapAddN 
+mMapAddN n =
+  Call mMap (Fun "" "x" (Add (Var "x") n))
 
 -- Задание 16 fact 
-
-
-
+fact =
+  mLet [ ("sub1", Fun "sub1" "x" 
+                   (Call (Fun "loop" "y" 
+                            (Let ("z", Add (IntNum 1) (Var "y"))
+                              (ifEq (Var "z") (Var "x")
+                                    (Var "y")
+                                    (Call (Var "loop") (Var "z")))))
+                         (IntNum 0)))
+       , ("mult", Fun "mult" "x"
+                   (Fun "loop" "y"
+                      (ifEq (Var "y") (IntNum 0)
+                            (IntNum 0)
+                            (Add (Var "x") 
+                                 (Call (Var "loop") 
+                                       (Call (Var "sub1") (Var "y")))))))
+       ]
+    (Fun "fact" "n"
+       (IfGreater (IntNum 2) (Var "n")
+                  (IntNum 1)
+                  (Call (Call (Var "mult") (Var "n"))
+                        (Call (Var "fact") 
+                              (Call (Var "sub1") 
+                                    (Var "n"))))))

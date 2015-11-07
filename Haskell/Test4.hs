@@ -99,14 +99,14 @@ test_mMap_1 =
 
 
 ------ Задание 15 mMapAddN 
---test_mMapAddN_1 = 
---  ( evalExp 
---    $ Call (mMapAddN (IntNum 5))
---           (Pair (IntNum 1) (Pair (IntNum 2) (Pair (IntNum 3) Unit))) )
---  == Pair (IntNum 6) (Pair (IntNum 7) (Pair (IntNum 8) Unit))
+test_mMapAddN_1 = 
+ ( evalExp 
+    $ Call (mMapAddN (IntNum 5))
+           (Pair (IntNum 1) (Pair (IntNum 2) (Pair (IntNum 3) Unit))) )
+  == Pair (IntNum 6) (Pair (IntNum 7) (Pair (IntNum 8) Unit))
 
 ------ Задание 16 fact 
---test_fact_1 = ( evalExp $ Call fact (IntNum 5) ) == IntNum 120
+test_fact_1 = ( evalExp $ Call fact (IntNum 5) ) == IntNum 120
 
 ---- Запуск всех тестов
 ---- На каждый тест 2 строки main
@@ -161,10 +161,10 @@ main = do
   Control.Exception.catch (putStrLn $ show test_ifEq_1) handler2 
   putStr ("14 test_mMap_1 ")
   Control.Exception.catch (putStrLn $ show test_mMap_1) handler2 
-  --putStr ("15 test_mMapAddN_1 ")
-  --Control.Exception.catch (putStrLn $ show test_mMapAddN_1) handler2 
-  --putStr ("16 test_fact_1 ")
-  --Control.Exception.catch (putStrLn $ show test_fact_1) handler2 
+  putStr ("15 test_mMapAddN_1 ")
+  Control.Exception.catch (putStrLn $ show test_mMapAddN_1) handler2 
+  putStr ("16 test_fact_1 ")
+  Control.Exception.catch (putStrLn $ show test_fact_1) handler2 
   putStrLn "all tests done"
 
 
