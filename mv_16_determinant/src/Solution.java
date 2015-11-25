@@ -1,9 +1,9 @@
 /**
- * Created by goga on 05.11.15.
+ * Created by goga on 12.11.15.
  */
 
 import java.io.*;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Solution {
@@ -11,8 +11,7 @@ public class Solution {
     PrintWriter out;
     StringTokenizer st;
     int n;
-    Double[][] a = new Double[1000][1000];
-    Double[] x = new Double[1000];
+    ArrayList<ArrayList<Double>> m = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         Solution sol = new Solution();
@@ -20,17 +19,8 @@ public class Solution {
         sol.recap();
     }
 
-    void read() throws IOException {
-        in = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
-        n = nextInt();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                a[i][j] = nextDouble();
-            }
-            a[i][n] = nextDouble();
-        }
-    }
-    public void Gauss() {
+    Double[] Gauss(Double[][] a) {
+        Double[] x = new Double[n*n];
         Double max;
         Double maxb;
         int i, j, k, m;
@@ -80,12 +70,67 @@ public class Solution {
                 max = max - a[i][j] * x[j];
             x[i] = max;
         }
+        return x;
     }
+
+    ArrayList<Double> inverse_matrix (ArrayList<ArrayList<Double>> a, ArrayList<Double> b)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            a.get(i).add(n, b.get(i));
+        }
+        Double[][] a1 = new Double[1000][1000];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= n; j++) {
+                a1[i][j] = a.get(i).get(j);
+            }
+        }
+        Double[] d = new Double[1000];
+        d = Gauss(a1);
+        ArrayList<Double> res = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            res.add(i,d[i]);
+        }
+        return res;
+    }
+
+    void read() throws IOException {
+        in = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
+        n = nextInt();
+
+        for (int i = 0; i < n; i++) {
+            ArrayList<Double> temp = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                temp.add(j,nextDouble());
+            }
+            m.add(i,temp);
+        }
+    }
+
     void recap() throws Exception {
         out = new PrintWriter(new BufferedOutputStream(new FileOutputStream("output.txt")));
-        Gauss();
+        ArrayList<ArrayList<Double>> b = new ArrayList<>();
+
         for (int i = 0; i < n; i++) {
-            out.print(x[i] + " ");
+            ArrayList<Double> temp = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                if (i == j)
+                    temp.add(j, 1.0);
+                else temp.add(j, 0.0);
+            }
+            b.add(i,temp);
+        }
+
+        ArrayList<ArrayList<Double>> ES = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+        {
+            ES.add(i, inverse_matrix(m, b.get(i)));
+        }
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+                out.print(ES.get(i).get(j) + "   ");
+            out.println();
         }
         out.close();
     }
