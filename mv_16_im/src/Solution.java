@@ -20,7 +20,7 @@ public class Solution {
     }
 
     Double[] Gauss(Double[][] a) {
-        Double[] x = new Double[n*n];
+        Double[] x = new Double[n * n];
         Double max;
         Double maxb;
         int i, j, k, m;
@@ -73,10 +73,8 @@ public class Solution {
         return x;
     }
 
-    ArrayList<Double> inverse_matrix (ArrayList<ArrayList<Double>> a, ArrayList<Double> b)
-    {
-        for (int i = 0; i < n; i++)
-        {
+    ArrayList<Double> inverse_matrix(ArrayList<ArrayList<Double>> a, ArrayList<Double> b) {
+        for (int i = 0; i < n; i++) {
             a.get(i).add(n, b.get(i));
         }
         Double[][] a1 = new Double[1000][1000];
@@ -89,7 +87,7 @@ public class Solution {
         d = Gauss(a1);
         ArrayList<Double> res = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            res.add(i,d[i]);
+            res.add(i, d[i]);
         }
         return res;
     }
@@ -101,9 +99,9 @@ public class Solution {
         for (int i = 0; i < n; i++) {
             ArrayList<Double> temp = new ArrayList<>();
             for (int j = 0; j < n; j++) {
-                temp.add(j,nextDouble());
+                temp.add(j, nextDouble());
             }
-            m.add(i,temp);
+            m.add(i, temp);
         }
     }
 
@@ -118,18 +116,16 @@ public class Solution {
                     temp.add(j, 1.0);
                 else temp.add(j, 0.0);
             }
-            b.add(i,temp);
+            b.add(i, temp);
         }
 
         ArrayList<ArrayList<Double>> ES = new ArrayList<>();
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             ES.add(i, inverse_matrix(m, b.get(i)));
         }
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++)
-                out.print(ES.get(i).get(j) + "   ");
+                out.print(ES.get(j).get(i) + "   ");
             out.println();
         }
         out.close();

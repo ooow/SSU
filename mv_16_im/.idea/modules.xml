@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mv_16_determinant.iml" filepath="$PROJECT_DIR$/mv_16_determinant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mv_16_im.iml" filepath="$PROJECT_DIR$/mv_16_im.iml" />
     </modules>
   </component>
 </project>
