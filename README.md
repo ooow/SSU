@@ -21,3 +21,4 @@ in Java
 * Gauss method with a choice of the main element (mv_13_Gauss)
 * Square method (mv_14_sqr)
 * Iterative method (mv_15_sim)
+* Inverse matrix (mv_16_im)
