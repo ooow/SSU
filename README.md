@@ -19,3 +19,5 @@ in Java
 * The length of the ellipse (mv_11_DEl)
 * The system with the lower triangular matrix (mv_12_SNTM)
 * Gauss method with a choice of the main element (mv_13_Gauss)
+* Square method (mv_14_sqr)
+* Iterative method (mv_15_sim)
