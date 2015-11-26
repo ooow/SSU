@@ -11,8 +11,10 @@ public class Solution {
     StringTokenizer st;
     int n;
     double[][] a;
-    double[] b;
+    double[] x;
     double[] c;
+    double[] b;
+    double eps = 0.0000000001;
 
     public static void main(String[] args) throws Exception {
         Solution sol = new Solution();
@@ -23,42 +25,50 @@ public class Solution {
     void read() throws IOException {
         in = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         n = nextInt();
-        a = new double[n][n + 1];
+        a = new double[n][n];
+        b = new double[n];
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n + 1; j++) {
+            for (int j = 0; j < n; j++) {
                 a[i][j] = nextDouble();
             }
+            b[i] = nextDouble();
         }
+    }
+
+    boolean con(double[] xx, double[] cc) {
+        double norm = 0.0;
+        for (int i = 0; i < n; i++) {
+            norm += (xx[i] - cc[i]) * (xx[i] - cc[i]);
+        }
+        return Math.sqrt(norm) >= eps;
     }
 
     void recap() throws Exception {
         out = new PrintWriter(new BufferedOutputStream(new FileOutputStream("output.txt")));
-        b = new double[n];
+        x = new double[n];
         c = new double[n];
-        double eps = 0.0000000001;
-        int k = 0;
-        while (true) {
-            k++;
-            for (int i = 0; i < n; i++) {
-                c[i] = a[i][n];
-                for (int j = 0; j < n; j++) {
-                    if (i != j) {
-                        c[i] -= a[i][j] * b[j];
-                    }
-                }
-                c[i] /= a[i][i];
-            }
-            double e = 0.0;
-            for (int i = 0; i < n; i++) {
-                e += Math.abs(c[i] - b[i]);
-            }
-            if (e < eps)
-                break;
-
-            System.arraycopy(c, 0, b, 0, n);
-        }
         for (int i = 0; i < n; i++) {
-            out.print(b[i] + " ");
+            x[i] = 0;
+        }
+        int k = 0;
+        do {
+            k++;
+            System.arraycopy(x, 0, c, 0, n);
+            for (int i = 0; i < n; i++) {
+                double var = 0;
+                for (int j = 0; j < i; j++) {
+                    var += a[i][j] * x[j];
+                }
+                for (int j = i + 1; j < n; j++) {
+                    var += a[i][j] * c[j];
+                }
+                x[i] = (b[i] - var) / a[i][i];
+            }
+        }
+        while (con(x, c));
+
+        for (int i = 0; i < n; i++) {
+            out.print(x[i] + " ");
         }
         out.close();
         System.out.println(k);
