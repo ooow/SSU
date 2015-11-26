@@ -22,3 +22,4 @@ in Java
 * Square method (mv_14_sqr)
 * Iterative method (mv_15_sim)
 * Inverse matrix (mv_16_im)
+* Gauss–Seidel method (mv_17_mz)
