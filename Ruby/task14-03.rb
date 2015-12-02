@@ -1,16 +1,16 @@
 class BottleMachine
-  RowCount = 10						 #количество рядов
-  PlaceNumber = 8					 #количество едениц товара в каждом ряду
-  Banknotes = [100, 50, 10, 5, 2, 1] #наменалы принимаемых купюр
-  Value = 10				     	 #объем одной касеты для купюр
+  RowCount = 10						            #количество рядов
+  PlaceNumber = 8					            #количество едениц товара в каждом ряду
+  Banknotes = [100, 50, 10, 5, 2, 1]  #наменалы принимаемых купюр
+  Value = 10				     	            #объем одной касеты для купюр
 
 
   def initialize 	# создание автомата
-    @goods     		= Array.new(RowCount){[nil, 0, 0]}				 # список товаров
+    @goods     		= Array.new(RowCount){[nil, 0, 0]}				       # список товаров
     @bills    		= Hash[Banknotes.map { |nominal| [nominal, 0] }] # список купюр находящихся в автомате
     @capacity 		= Hash[Banknotes.map { |nominal| [nominal, 0] }] # емкость с общей денежной массой
-    @sale       	= Hash.new {[0, 0]} 							 # проданные товары
-    @cache     		= 0												 # кэш автомата
+    @sale       	= Hash.new {[0, 0]} 							               # проданные товары
+    @cache     		= 0												                       # кэш автомата
     puts "Автомат установлен"
   end
 
