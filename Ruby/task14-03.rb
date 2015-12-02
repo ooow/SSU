@@ -1,175 +1,175 @@
 class BottleMachine
   RowCount = 10						 #количество рядов
-  PlaceNumber = 5					 #количество едениц товара в каждом ряду
+  PlaceNumber = 8					 #количество едениц товара в каждом ряду
   Banknotes = [100, 50, 10, 5, 2, 1] #наменалы принимаемых купюр
-  CassetteV = 10				     #объем одной касеты для купюр
+  Value = 10				     	 #объем одной касеты для купюр
 
-  def initialize
-    @innerRows      = Array.new(RowCount){[nil, 0, 0]}
-    @cassetStore    = Hash[Banknotes.map { |nominal| [nominal, 0] }]
-    @cassetAddition = Hash[Banknotes.map { |nominal| [nominal, 0] }]
-    @saleData       = Hash.new {[0, 0]}
-    @deposCount     = 0
+
+  def initialize 	# создание автомата
+    @goods     		= Array.new(RowCount){[nil, 0, 0]}				 # список товаров
+    @bills    		= Hash[Banknotes.map { |nominal| [nominal, 0] }] # список купюр находящихся в автомате
+    @capacity 		= Hash[Banknotes.map { |nominal| [nominal, 0] }] # емкость с общей денежной массой
+    @sale       	= Hash.new {[0, 0]} 							 # проданные товары
+    @cache     		= 0												 # кэш автомата
     puts "Автомат установлен"
   end
 
 
-  def empty
-    @innerRows      = Array.new(RowCount){[nil, 0, 0]}
-    @cassetStore    = Hash[Banknotes.map { |nominal| [nominal, 0] }]
-    @cassetAddition = Hash[Banknotes.map { |nominal| [nominal, 0] }]
-    @saleData       = Hash.new {[0, 0]}
-    @deposCount     = 0
+  def empty 		# опустошение автомата
+    @goods     		= Array.new(RowCount){[nil, 0, 0]}
+    @bills      	= Hash[Banknotes.map { |nominal| [nominal, 0] }]
+    @capacity   	= Hash[Banknotes.map { |nominal| [nominal, 0] }]
+    @sale       	= Hash.new {[0, 0]}
+    @cache     		= 0
     puts "Автомат опустошен"
   end
 
 
-  def load (addHash)
-    deletedProd     = Hash.new
-    addHash.each do |product, info|
-
-      if info[1] > 0
-        @innerRows.each_with_index do |oneRow, index|
-          if @innerRows[index][0] == nil &&
-              info[1] > 0
-            numForAdd = info[1] <= PlaceNumber ? info[1] : PlaceNumber
-            @innerRows[index] = [product, info[0], numForAdd]
-            info[1] -= numForAdd
+  def load (addHash)	# загрузка товаров в автомат
+    rest     = Array.new(){[nil, 0]}		# список непоместившихся товаров
+    
+    addHash.each do |product, count|
+      if count[1] > 0
+        @goods.each_with_index do |oneRow, index|
+          if @goods[index][0] == nil &&
+              count[1] > 0
+            n = count[1] <= PlaceNumber ? count[1] : PlaceNumber
+            @goods[index] = [product, count[0], n]
+            count[1] -= n
           end
         end
       end
 
-      @innerRows.each_with_index do |oneRow, index|
-        if @innerRows[index][0] == product &&
-            @innerRows[index][2] <  PlaceNumber &&
-            info[1] > 0
-
-          numForAdd = info[1] <= PlaceNumber ? info[1] : PlaceNumber
-          @innerRows[index] = [product, info[0], numForAdd]
-          info[1] -= numForAdd
+      if count[1] > 0
+          rest.push(product, count[1])
+      end
+      @goods.each_with_index do |oneRow, index|
+        if @goods[index][0] == product &&
+            @goods[index][2] <  PlaceNumber &&
+            count[1] > 0
+          n = count[1] <= PlaceNumber ? count[1] : PlaceNumber
+          @goods[index] = [product, count[0], n]
+          count[1] -= n
         end
       end
-
-      if info[1] > 0
-        deletedProd[product] = info
-      end
     end
-
-    return deletedProd
+    puts ["Не поместились напитки: ", rest]
   end
 
 
-  def deposit (addHash)
-    sizeOfDeposit = 0
+  def deposit (addHash) 		# внесение денег в автомат
+    balance = 0
 
     addHash.each do |banknote, number|
-      if @cassetStore.has_key? banknote
-        addedBank      = banknote * number
-        @deposCount   += addedBank
-        sizeOfDeposit += addedBank
+      if @bills.has_key? banknote
+      	empty = Value - @bills[banknote]		# узнаем кол-во свободных ячеек для данной купюры
 
-        emptySlot  = CassetteV - @cassetStore[banknote]
-
-        if emptySlot >= number
-          @cassetStore[banknote] += number
+      	if empty >= number
+          @bills[banknote] += number
+          newMoney       	= banknote * number
+          @cache   	  	   += newMoney
+          balance 	  	   += newMoney
         else
-          @cassetStore[banknote] += emptySlot
-          @cassetAddition += banknote * (number - emptySlot)
+          @bills[banknote] 	  += empty
+          @capacity[banknote] += number   - empty
+          newMoney       	   = banknote * empty
+          @cache   	  		  += newMoney
+          balance 	  		  += newMoney
         end
       else
-        puts "#Автомат не принимает данную купюру: {banknote}"
+        puts "Автомат не принимает данную купюру: #{banknote}"
       end
     end
-    puts "Ваш счёт увеличен на #{@total}"
+    puts "Ваш счёт увеличен на #{balance}"
     self
   end
 
 
-  def order (name)
-    @innerRows.each_with_index do |oneRow, index|
-      if  @innerRows[index][0] == name &&
-          @innerRows[index][2] > 0
+  def order (name) 		# покупка товра
+    @goods.each_with_index do |oneRow, index|
+      if  @goods[index][0] == name &&
+          @goods[index][2] > 0
 
-           order = @innerRows[index][1]
-        if order <= @deposCount
-          @deposCount -= order
-          @innerRows[index][2] -= 1
+           order = @goods[index][1]
+        if order <= @cache
+          @cache -= order
+          @goods[index][2] -= 1
+          @bills[@goods[index][1]] -= 1
 
-          if not @saleData.has_key? name
-            @saleData[name] = [order, 1]
+          if not @sale.has_key? name
+            @sale[name] = [order, 1]
           else
-            @saleData[name] = [@saleData[name][0] + order, @saleData[name][1] + 1]
+            @sale[name] = [@sale[name][0] + order, @sale[name][1] + 1]
           end
 
           puts "Куплено #{name}"
         else
-          puts "У Вас не хватает денег #{@rows[index][1]} для покупки #{name}"
+          puts "У Вас не хватает денег #{@goods[index][1]} для покупки #{name}"
         end
 
-        if @innerRows[index][2] == 0
-          @innerRows[index] = [nil, 0, 0]
+        if @goods[index][2] == 0
+          @goods[index] = [nil, 0, 0]
         end
 
         return self
       end
     end
-    puts "Напиток не доступен"
+    puts "Напитка нет в наличии"
     self
   end
 
 
   def withdraw
-    if @deposCount > 0
-      retryBank = Hash[Banknotes.map { |nominal| [nominal, 0] }]
+  	money = 0
+    if @cache > 0
+      retryH = Hash[Banknotes.map { |nominal| [nominal, 0] }]
 
-      @cassetStore.sort.map do |banknote, number|
-        while @deposCount >= banknote &&
+      @bills.sort.map do |banknote, number|
+        while @cache >= banknote &&
                number > 0 do
 
-          @deposCount -= banknote
+          @cache -= banknote
           number -= 1
-          @cassetStore[banknote] -= 1
-          retryBank[banknote] += 1
+          @bills[banknote] -= 1
+          retryH[banknote] += 1
         end
       end
 
-      total_returned = 0
-      retryBank.each do |banknote, number|
-        total_returned += banknote * number
+      retryH.each do |banknote, number|
+        money += banknote * number
       end
-      puts "#Автомат возвращает {total_returned} монет. На депозите #{@deposit_counter} монет"
-
-      return retryBank
+      puts "Автомат возвращает #{money} монет. На депозите #{@cache} монет"
+      return retryH
     else
-      puts "Error! Ваш депозит пуст"
+      puts "Error! На вашем депозите нетсредств"
       return Hash.new
     end
   end
 
 
   def status
-    money = 0
-    bankInfo = Hash[Banknotes.map { |x| [x, @cassetAddition[x] + @cassetStore[x]] }]
-    bankInfo.each do |banknote, number|
-      money += banknote * number
-    end
-
+    bankInfo = Hash[Banknotes.map { |x| [x, @bills[x]] }]
     notEmpty = Array.new
-    @innerRows.each do |inRow|
+    @goods.each do |inRow|
       notEmpty << inRow if inRow[0]
     end
-
-    [@innerRows, money, bankInfo]
+    puts ["Напитки:", @goods, "Депозит:", @cache, "Банкноты:", bankInfo, "Емкость:", @capacity]
   end
 
 
   def stat
-    @saleData
+    @sale
   end
 end
 
 nm = BottleMachine.new
 nm.empty
-nm.load({'Sprite' => [50,8], 'Fanta' => [35, 12], 'Coca-Cola' => [40, 12]})
-nm.deposit({100 => 5, 50 => 5, 10 => 3, 2 => 5, 1 => 7})
-puts nm.status
+nm.load({'Sprite' => [50,50], 'Fanta' => [10, 12], 'Coca-Cola' => [100, 12]})
+nm.deposit({100 => 50, 50 => 5, 10 => 3, 2 => 5, 1 => 7})
+nm.status
+nm.order('Sprite')
+nm.order('Coca-Cola')
+puts nm.stat
+#nm.status
+#puts nm.withdraw
+#puts nm.stat
