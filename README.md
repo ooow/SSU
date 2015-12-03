@@ -23,3 +23,4 @@ in Java
 * Iterative method (mv_15_sim)
 * Inverse matrix (mv_16_im)
 * Gauss–Seidel method (mv_17_mz)
+* Solution of nonlinear equations (mv_18_nu) (5 methods)
