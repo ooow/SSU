@@ -76,7 +76,21 @@ class BottleMachine
     self
   end
 
-
+  def gg()
+    key = @bills.max_by{ |a, b|  a * b}[0]
+    @bills[key] -= 1
+    @bills.each do |k, v|
+      if k < key
+        if key.div(k) + @bills[k] <= Value
+          @bills[k] += key.div(k)
+          key = key % k
+        else
+          key = @bills[k] + key.div(k) - Value
+          @bills[k] = Value
+        end
+      end
+    end  
+  end
 
   def order (name) 		# покупка товра
     @goods.each_with_index do |oneRow, index|
@@ -87,36 +101,21 @@ class BottleMachine
         if order <= @cache
           @cache -= order
           @goods[index][2] -= 1
-          # свернуть до проходу по Bancnotes
-          if @bills.include?(order)
-             @bills[@goods[index][1]] -= 1
-           else
-            if @bills[100] > order.div(100)
-              @bills[100] -= order.div(100)
-              order = order % 100
-            end
-            if @bills[50] > order.div(50)
-              @bills[50] -= order.div(50)
-              order = order % 50
-            end
-            if @bills[10] > order.div(10)
-            @bills[10] -= order.div(10)
-            order = order % 10
-            end
-            if @bills[5] > order.div(5)
-            @bills[5] -= order.div(5)
-            order = order % 5
-            end
-            if @bills[2] > order.div(2)
-            @bills[2] -= order.div(2)
-            order = order % 2
-            end
-            if @bills[1] > order.div(1)
-            @bills[1] -= order.div(1)
-            end
-            order = @goods[index][1]
-          end
 
+          if @bills.include?(order) && @bills[@goods[index][1]] > 0
+              @bills[@goods[index][1]] -= 1
+          else
+            b = Banknotes
+            b.each do |i|             # разбиваем сумму покупки на имеющиеся купюры
+              if @bills[i] >= order.div(i)
+                @bills[i] -= order.div(i)
+                order = order % i
+              else
+                gg
+              end
+            end
+          end
+          order = @goods[index][1]
           if not @sale.has_key? name
             @sale[name] = [order, 1]
           else
@@ -179,6 +178,9 @@ class BottleMachine
     self
   end
 
+  def showd
+    puts @bills
+  end
 
   def stat
     @sale
@@ -188,8 +190,42 @@ end
 
 nm = BottleMachine.new
 #nm.empty
-nm.load({'Sprite' => [50,10], 'Fanta' => [10, 10], 'Coca-Cola' => [25, 10]})
-nm.deposit({100 => 50, 50 => 5, 10 => 3, 2 => 5, 1 => 7})
+#nm.load({'Sprite' => [50,10], 'Fanta' => [10, 10], 'Coca-Cola' => [25, 10]})
+nm.load({'Sprite' => [25,50]})
+nm.deposit({100 => 5, 50 => 5, 10 => 5, 2 => 5, 1 => 5})
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+nm.order('Sprite')
+nm.showd
+#nm.order('Sprite')
+#nm.order('Sprite')
 #nm.order('Sprite')
 #nm.order('Coca-Cola')
 #nm.order('Coca-Cola')
