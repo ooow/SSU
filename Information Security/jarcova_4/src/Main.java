@@ -16,7 +16,6 @@ public class Main {
         Main main = new Main();
         main.code();
         main.decode();
-
     }
 
     // записать файл в текс
@@ -35,12 +34,14 @@ public class Main {
 
         ArrayList<Character> bits = bytesToBits(data);
         saveFile(bits);
+        System.out.println(bits);
     }
 
     // выгрузить файл из текста
     public void decode() throws IOException {
         ArrayList<Character> bits = readBits();
         byte[] data = bitsToBytes(bits);
+        System.out.println(bits);
 
         OutputStream outputStream = new DataOutputStream(new FileOutputStream(new File("page.jpg")));
         outputStream.write(data);
@@ -48,7 +49,7 @@ public class Main {
         outputStream.close();
     }
 
-    // считываение байтов их текста
+    // считываение байтов из текста
     public ArrayList<Character> readBits() throws IOException {
         ArrayList<Character> bits = new ArrayList<>();
         Scanner sc = new Scanner(new FileReader(fileNameTwo));
@@ -57,8 +58,8 @@ public class Main {
                 String str = sc.nextLine();
                 char c = str.charAt(str.length() - 1);
                 if (c == ' ')
-                    bits.add('0');
-                else bits.add('1');
+                    bits.add('1');
+                else bits.add('0');
             } catch (NoSuchElementException e) {
                 break;
             }
@@ -66,20 +67,26 @@ public class Main {
         return bits;
     }
 
-    // сохранение файа в тексте
+    // сохранение файла в тексте
     public void saveFile(ArrayList<Character> bits) throws IOException {
         Scanner sc = new Scanner(new FileReader(fileName));
         PrintWriter pw = new PrintWriter(fileNameTwo);
         Iterator<Character> bit = bits.iterator(); //iterator берет по 1 экзем с массива битов
         while (true) {
             try {
+                String str = sc.nextLine();
+                char c = str.charAt(str.length() - 1);
+                while (c == ' ') {
+                    str = str.substring(0, str.length() - 1);
+                    c = str.charAt(str.length() - 1);
+                }
                 if (bit.hasNext()) { //если еще есть биты
-                    if (bit.next().compareTo('0') == 0)
-                        pw.write(sc.nextLine() + " \n");
-                    else
-                        pw.write(sc.nextLine() + "\n");
+                    if (bit.next().compareTo('0') == 1) {
+                        pw.write(str + " \n");
+                    } else
+                        pw.write(str + "\n");
                 } else
-                    pw.write(sc.nextLine() + "\n");
+                    pw.write(str + "\n");
             } catch (NoSuchElementException e) {
                 break;
             }
