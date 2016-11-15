@@ -22,14 +22,22 @@ public class Caesar {
             }
         }
         Caesar caesar = new Caesar();
-        text = caesar.encrypt(text, 1, 7);
-        System.out.println(text);
-        text = caesar.decrypt(text, 1, 7);
-        System.out.println(text);
+        sc = new Scanner(System.in);
+        System.out.println("Введите n  и  k");
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        System.out.println("Выполнить шифрование(1) или дешифрование(2) ?");
+        if (sc.nextInt() == 1) {
+            text = caesar.encrypt(text, n, k);
+            System.out.println(text);
+        } else {
+            text = caesar.decrypt(text, n, k);
+            System.out.println(text);
+        }
     }
 
     Caesar() {
-        char[] pun = {'.', ',', ';', ':', '!', '?', '-'};
+        char[] pun = {'.', ',', ';', ':', '!', '?', '-', ' '};
 
         for (char c = 'а'; c <= 'я'; c++) {
             alphabet.add(c);
@@ -40,6 +48,7 @@ public class Caesar {
         for (char c : pun) {
             alphabet.add(c);
         }
+        System.out.println("Размер алфавита:" + alphabet.size());
     }
 
     String encrypt(String text, int n, int k) {
@@ -47,6 +56,7 @@ public class Caesar {
         n = n % m;
         k = k % m;
         if (nod(m, n) != 1) {//проверка простоты m относительно n
+            System.out.println("Проверка простоты провалена");
             return null;
         }
         StringBuilder cryptogram = new StringBuilder();
@@ -54,8 +64,12 @@ public class Caesar {
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
             int index = alphabet.indexOf(c);
-            index = (index * n + k) % m;
-            cryptogram.append(alphabet.get(index));
+            if (index != -1) {
+                index = (index * n + k) % m;
+                cryptogram.append(alphabet.get(index));
+            } else {
+                return "В исходном тексте найден недопустимый символ";
+            }
         }
         return cryptogram.toString();
     }
