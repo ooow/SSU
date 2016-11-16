@@ -7,7 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by Гога on 12.10.2016.
+ * Created by goga on 12.10.16.
  */
 public class SiteParser {
     private String site = "https://www.avito.ru";
