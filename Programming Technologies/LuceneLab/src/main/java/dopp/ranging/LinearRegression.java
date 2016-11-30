@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-;
-
 /**
  * Created by goga on 24.11.16.
  */

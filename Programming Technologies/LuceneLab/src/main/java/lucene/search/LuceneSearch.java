@@ -6,10 +6,9 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -35,8 +34,8 @@ public class LuceneSearch {
         searcher = new Searcher(dir);
         long startTime = System.currentTimeMillis();
 
-
         TopDocs hits = searcher.search(searchQuery, selections);
+
         long endTime = System.currentTimeMillis();
 
         System.out.println("Найдено " + hits.totalHits + " докупентов с запросом - \"" + searchQuery + "\". Время поиска: " + (endTime - startTime) + " мс");
@@ -50,10 +49,8 @@ public class LuceneSearch {
 
                 JSONObject one = readOneFile(new File(filepath));
                 if (one != null) {
-                    //news.setScore(scoreDoc.score);
                     FoundFilesList.add(one);
                 }
-
                 System.out.println(filepath + " - " + scoreDoc.score);
             }
         }
