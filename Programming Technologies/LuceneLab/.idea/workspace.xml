@@ -36,8 +36,8 @@
       <file leaf-file-name="LinearRegression.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/dopp/ranging/LinearRegression.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+            <state relative-caret-position="405">
+              <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -889,12 +889,12 @@
       <workItem from="1480449234835" duration="179000" />
       <workItem from="1480453801994" duration="100000" />
       <workItem from="1480453905982" duration="2000" />
-      <workItem from="1480484440606" duration="5514000" />
+      <workItem from="1480484440606" duration="5682000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33623000" />
+    <option name="totallyTimeSpent" value="33791000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1378,8 +1378,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dopp/ranging/LinearRegression.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+        <state relative-caret-position="405">
+          <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
           <folding />
         </state>
       </provider>
