@@ -11,7 +11,6 @@ import org.apache.lucene.store.FSDirectory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class LuceneSearch {
@@ -48,20 +47,24 @@ public class LuceneSearch {
         return indexSearcher.doc(scoreDoc.doc);
     }
 
-    public ArrayList<Document> searchByName(String searchQuery) throws IOException, ParseException {
+    public ArrayList<Document> searchByName(String searchQuery) {
         ArrayList<Document> docs = new ArrayList<>();
-        TopDocs hits = search(searchQuery, "name");
-        if (hits.totalHits > 0) {
-            for (ScoreDoc scoreDoc : hits.scoreDocs) {
-                docs.add(getDocument(scoreDoc));
+        try {
+            TopDocs hits = search(searchQuery, "name");
+            if (hits.totalHits > 0) {
+                for (ScoreDoc scoreDoc : hits.scoreDocs) {
+                    docs.add(getDocument(scoreDoc));
+                }
             }
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
         }
         return docs;
     }
 
-    public ArrayList<Document> searchByRating(String rating) {
+    public ArrayList<Document> searchByRating(double rating, String isUp) {
         ArrayList<Document> docs = new ArrayList<>();
-        double minRating = Double.valueOf(rating);
+        double minRating = rating;
         try {
             while (minRating < 10) {
                 minRating = Math.round((minRating + 0.01) * 100.0) / 100.0;
@@ -75,7 +78,8 @@ public class LuceneSearch {
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-        Collections.reverse(docs);
+        if (Integer.valueOf(isUp) == 1)
+            Collections.reverse(docs);
         return docs;
     }
 }
