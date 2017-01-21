@@ -11,22 +11,26 @@ import org.apache.lucene.store.FSDirectory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class LuceneSearch {
 
     private static final int MAX_SEARCH = 1000;
     private IndexSearcher indexSearcher;
+    private static LuceneSearch instance = new LuceneSearch();
 
-    public static void main(String[] args) throws IOException, ParseException {
-        LuceneSearch lc = new LuceneSearch();
-        lc.searchByRating("9.11");
+    public static LuceneSearch getInstance() {
+        return instance;
     }
 
-
-    public LuceneSearch() throws IOException {
+    public LuceneSearch() {
         String indexDir = "src/main/resources/index";
-        Directory indexDirectory = FSDirectory.open(new File(indexDir).toPath());
-        indexSearcher = new IndexSearcher(DirectoryReader.open(indexDirectory));
+        try {
+            Directory indexDirectory = FSDirectory.open(new File(indexDir).toPath());
+            indexSearcher = new IndexSearcher(DirectoryReader.open(indexDirectory));
+        } catch (IOException e) {
+        }
     }
 
     protected TopDocs search(String searchQuery, String... selections) throws IOException, ParseException {
@@ -55,18 +59,23 @@ public class LuceneSearch {
         return docs;
     }
 
-    public ArrayList<Document> searchByRating(String searchQuery) throws IOException, ParseException {
+    public ArrayList<Document> searchByRating(String rating) {
         ArrayList<Document> docs = new ArrayList<>();
-        double minRating = Double.valueOf(searchQuery);
-        while (minRating < 10) {
-            minRating = Math.round((minRating + 0.01) * 100.0) / 100.0;
-            TopDocs hits = search(minRating + "", "rating");
-            if (hits.totalHits > 0) {
-                for (ScoreDoc scoreDoc : hits.scoreDocs) {
-                    docs.add(getDocument(scoreDoc));
+        double minRating = Double.valueOf(rating);
+        try {
+            while (minRating < 10) {
+                minRating = Math.round((minRating + 0.01) * 100.0) / 100.0;
+                TopDocs hits = search(minRating + "", "rating");
+                if (hits.totalHits > 0) {
+                    for (ScoreDoc scoreDoc : hits.scoreDocs) {
+                        docs.add(getDocument(scoreDoc));
+                    }
                 }
             }
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
         }
+        Collections.reverse(docs);
         return docs;
     }
 }
