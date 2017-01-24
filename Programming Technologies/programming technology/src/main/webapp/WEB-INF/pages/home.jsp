@@ -6,41 +6,128 @@
 <head>
     <title>Top Films</title>
 </head>
-<body>
-<h1 class="title">Top Films</h1>
+<style>
 
+    a {
+        margin-left: 30px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .rating {
+        color: goldenrod;
+        margin-left: 10px;
+    }
+
+    .form1 {
+        margin: 10px;
+    }
+
+    h1 {
+        color: white;
+        font-family: Georgia;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    body {
+        background-color: black;
+    }
+
+    .mainHead {
+        width: 50%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    .element {
+        width: 40%;
+        margin: auto;
+    }
+
+    .btn {
+        background-color: black;
+        color: white;
+        border-radius: 32px;
+        padding: 4px;
+    }
+
+    .submitt {
+        margin-left: 25%;
+        width: 48px;
+        height: 48px;
+        padding: 4px;
+        border-radius: 32px;
+        background-color: #000000;
+        color: azure;
+    }
+
+    .input {
+        background: black;
+        color: white;
+        border-radius: 32px;
+        padding: 4px;
+    }
+</style>
+
+<body>
 <div class="mainHead">
-    <form action="/search" method="get">
-        <p><input type="text" id="title" name="title" placeholder="фильм">
-            <input type="submit" value="Поиск фильма"/>
-        </p>
-    </form>
-    <form action="/search" method="post">
-        <p><input type="text" id="rating" name="rating" placeholder="от 1 до 10">
-            <input type="submit" value="Поиск по рейтингу"/>
-        </p>
-    </form>
-    <form action="/search" method="post">
+    <h1 class="element">TOP FILMS</h1>
+    <table>
+        <tr>
+            <td>
+                <form class="form1" action="/search" method="get">
+                    <p>
+                        <input class="input" type="text" id="title" name="title" placeholder="фильм">
+                        <input class="btn" type="submit" value="Поиск фильма"/>
+                    </p>
+                </form>
+            </td>
+            <td>
+                <form class="form1" action="/search" method="post">
+                    <p>
+                        <input class="input" type="text" id="rating" name="rating" placeholder="от 1 до 10">
+                        <input class="btn" type="submit" value="Поиск по рейтингу"/>
+                    </p>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form class="element" action="/search" method="post">
         <c:if test="${isUp == 0}">
             <input type="hidden" id="isUp" name="isUp" value="1">
             <input type="hidden" name="rating" value="${oldrating}">
-            <input type="submit" value="По убыванию рейтинга"/>
+            <input class="submitt" type="submit" value="↓"/>
         </c:if>
     </form>
-    <form action="/search" method="post">
+    <form class="element" action="/search" method="post">
         <c:if test="${isUp == 1}">
             <input type="hidden" id="isUp" name="isUp" value="0">
             <input type="hidden" name="rating" value="${oldrating}">
-            <input type="submit" value="По возрастанию рейтинга"/>
+            <input class="submitt" type="submit" value="↑">
         </c:if>
     </form>
-    <p>${errorMessage}</p>
-</div>
 
-<c:forEach var="film" items="${topfilms}">
-    <p>${film.get("rating")} <a href="${film.get("href")}">${film.get("name")}</a></p>
-    <%-- <img src="${film.get("img")}">--%>
-</c:forEach>
+    <p style="color: white">${errorMessage}</p>
+
+    <c:forEach var="film" items="${topfilms}">
+        <table>
+            <tr>
+                <td>
+                    <div class="rating">${film.get("rating")} </div>
+                </td>
+                <td>
+                    <a href="${film.get("href")}">${film.get("name")}</a>
+                        <%-- <img src="${film.get("img")}">--%>
+                </td>
+            </tr>
+        </table>
+    </c:forEach>
+</div>
 
 </body>
 </html>

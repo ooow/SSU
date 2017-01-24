@@ -1,5 +1,6 @@
 package search;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -28,10 +29,9 @@ public class Indexer {
 
     public Indexer(String dir) throws IOException {
         Directory indexDirectory = FSDirectory.open(new File(dir).toPath());
-        IndexWriterConfig indexConfig = new IndexWriterConfig();
+        IndexWriterConfig indexConfig = new IndexWriterConfig(new StandardAnalyzer());
         indexConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
         documents = new IndexWriter(indexDirectory, indexConfig);
-
     }
 
     public int createIndex() throws IOException {

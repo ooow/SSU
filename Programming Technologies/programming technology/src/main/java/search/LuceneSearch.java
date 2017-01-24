@@ -1,5 +1,6 @@
 package search;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -35,7 +36,7 @@ public class LuceneSearch {
     protected TopDocs search(String searchQuery, String... selections) throws IOException, ParseException {
         ArrayList<QueryParser> queryParsers = new ArrayList<>();
         for (String selection : selections) {
-            queryParsers.add(new QueryParser(selection, new SynonymAnalyzer()));
+            queryParsers.add(new QueryParser(selection, new StandardAnalyzer()));
         }
         BooleanQuery.Builder result_query = new BooleanQuery.Builder();
         for (QueryParser query : queryParsers)
