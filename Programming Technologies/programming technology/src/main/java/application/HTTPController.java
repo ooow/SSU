@@ -1,10 +1,12 @@
 package application;
 
 import org.apache.lucene.document.Document;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import search.LuceneSearch;
 
@@ -58,5 +60,22 @@ public class HTTPController {
             mv.addObject("errorMessage", erroreMessage);
         }
         return mv;
+    }
+
+    @RequestMapping(value = "/gettop", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getTop(@RequestParam(value = "rating", required = false, defaultValue = "1") String findRating) {
+        double rating = Double.valueOf(findRating) - 0.01;
+        ArrayList<Document> topfilms = searcher.searchByRating(rating, "1");
+        ArrayList<JSONObject> films = new ArrayList<>();
+        for (int i = 0; i < topfilms.size(); i++) {
+            JSONObject film = new JSONObject();
+            film.put("img", topfilms.get(i).get("img"));
+            film.put("href", topfilms.get(i).get("href"));
+            film.put("rating", topfilms.get(i).get("rating"));
+            film.put("title", topfilms.get(i).get("name"));
+            films.add(film);
+        }
+        return films.toString();
     }
 }

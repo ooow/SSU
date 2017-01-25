@@ -122,7 +122,7 @@
                 </td>
                 <td>
                     <a href="${film.get("href")}">${film.get("name")}</a>
-                        <%-- <img src="${film.get("img")}">--%>
+                         <%--<img src="${film.get("img")}">--%>
                 </td>
             </tr>
         </table>
