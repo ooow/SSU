@@ -83,4 +83,19 @@ public class LuceneSearch {
             Collections.reverse(docs);
         return docs;
     }
+
+    public ArrayList<Document> searchByYear(int year) {
+        ArrayList<Document> docs = new ArrayList<>();
+        try {
+            TopDocs hits = search(year + "", "year");
+            if (hits.totalHits > 0) {
+                for (ScoreDoc scoreDoc : hits.scoreDocs) {
+                    docs.add(getDocument(scoreDoc));
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return docs;
+    }
 }

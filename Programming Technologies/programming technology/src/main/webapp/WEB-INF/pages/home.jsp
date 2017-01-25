@@ -50,6 +50,7 @@
     }
 
     .btn {
+        margin-left: 12px;
         background-color: black;
         color: white;
         border-radius: 32px;
@@ -92,6 +93,14 @@
                     <p>
                         <input class="input" type="text" id="rating" name="rating" placeholder="от 1 до 10">
                         <input class="btn" type="submit" value="Поиск по рейтингу"/>
+                    </p>
+                </form>
+            </td>
+            <td>
+                <form class="form1" action="/searchbyyear" method="get">
+                    <p>
+                        <input class="input" type="text" id="year" name="year" placeholder="2016">
+                        <input class="btn" type="submit" value="Поиск по году"/>
                     </p>
                 </form>
             </td>

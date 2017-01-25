@@ -62,6 +62,23 @@ public class HTTPController {
         return mv;
     }
 
+    @RequestMapping(value = "/searchbyyear", method = RequestMethod.GET)
+    public ModelAndView searchByYear(@RequestParam(name = "year", required = false, defaultValue = "1") String yearr) {
+        ModelAndView mv = new ModelAndView("/home");
+        int year = 0;
+        try {
+            year = Integer.valueOf(yearr);
+        } catch (NumberFormatException e) {
+        }
+        ArrayList<Document> topfilms = searcher.searchByYear(year);
+        mv.addObject("topfilms", topfilms);
+        if (topfilms.size() < 1) {
+            String erroreMessage = "Не найдено ни одного фильма " + year + " года";
+            mv.addObject("errorMessage", erroreMessage);
+        }
+        return mv;
+    }
+
     @RequestMapping(value = "/gettop", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getTop(@RequestParam(value = "rating", required = false, defaultValue = "1") String findRating) {
@@ -74,6 +91,30 @@ public class HTTPController {
             film.put("href", topfilms.get(i).get("href"));
             film.put("rating", topfilms.get(i).get("rating"));
             film.put("title", topfilms.get(i).get("name"));
+            film.put("year", topfilms.get(i).get("year"));
+            films.add(film);
+        }
+        return films.toString();
+    }
+
+
+    @RequestMapping(value = "/getbyear", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getByYear(@RequestParam(value = "year", required = false, defaultValue = "2016") String yearr) {
+        int year = 0;
+        try {
+            year = Integer.valueOf(yearr);
+        } catch (NumberFormatException e) {
+        }
+        ArrayList<Document> topfilms = searcher.searchByYear(year);
+        ArrayList<JSONObject> films = new ArrayList<>();
+        for (int i = 0; i < topfilms.size(); i++) {
+            JSONObject film = new JSONObject();
+            film.put("img", topfilms.get(i).get("img"));
+            film.put("href", topfilms.get(i).get("href"));
+            film.put("rating", topfilms.get(i).get("rating"));
+            film.put("title", topfilms.get(i).get("name"));
+            film.put("year", topfilms.get(i).get("year"));
             films.add(film);
         }
         return films.toString();

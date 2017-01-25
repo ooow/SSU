@@ -34,6 +34,12 @@ public class SiteParser {
                     film.add(new TextField("rating", rating, Field.Store.YES));
                     film.add(new TextField("img", img, Field.Store.YES));
                     film.add(new TextField("href", href, Field.Store.YES));
+                    line = reader.readLine();
+                    while (line.indexOf("class=\"mqn\"") == -1) {
+                        line = reader.readLine();
+                    }
+                    String year = line.substring(line.lastIndexOf("</div") - 4, line.lastIndexOf("</div"));
+                    film.add(new TextField("year", year, Field.Store.YES));
                     films.add(film);
                     reader.readLine();
                 }
