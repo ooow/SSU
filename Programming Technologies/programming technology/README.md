@@ -1,15 +1,13 @@
-Проект выполнен для курса "Технологии программирования" СГУ-КНиИТ.
-==================================================================
-
-# Цель:
+# Проект выполнен для курса "Технологии программирования" СГУ-КНиИТ.
+## Цель:
 	создать веб-сервис для получения данных о фильмах с популярного киносайта гидолнайн.
 
-# Как запустить:
+## Как запустить:
 	* Необходимые инструменты:
-		* [*JDK 8>*](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-		* [*IntelliJ IDEA 14>*](https://www.jetbrains.com/idea/download/)
-		* [*Apache Maven 3>*](https://maven.apache.org/download.cgi)
-	* Скачать zip архив с [*проектом*](https://drive.google.com/open?id=0BwQudlf3AtgCQWFQanhycDBLZ28)
+		* [JDK 8>](<http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html>)
+		* [IntelliJ IDEA 14>](<https://www.jetbrains.com/idea/download/>)
+		* [Apache Maven 3>](<https://maven.apache.org/download.cgi>)
+	* Скачать zip архив с [проектом](<https://drive.google.com/open?id=0BwQudlf3AtgCQWFQanhycDBLZ28>)
 	* Перейти в директорию с проектом и разархивировать его
 		к примеру через терминал командой: unzip programming technology.zip
 	* Открыть проект в IntelliJ IDEA и запутить (Main)
@@ -41,6 +39,5 @@
 				href - ссылка на просмотр фильма
 				title - название
 
-#Сделанно: Студентом СГУ факультета КНиИТ
-Тиркия Гога
-===========
+## Сделанно: Студентом СГУ факультета КНиИТ
+## Тиркия Гога
