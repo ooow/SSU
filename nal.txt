@@ -1,0 +1,40 @@
+1
+Carrie
+Stiven King
+1974
+Novel
+10
+490
+15
+2
+Fifty Shades of Grey
+E. L. James
+2011
+Novel
+5
+1190
+20
+3
+Starting Out with C++: Early Objects
+Tony Gaddis, Judy Walters, Godfrey Muganda
+2013
+Science
+5
+700
+10
+4
+Problem Solving with C++
+Savitch W.
+2009
+Science
+5
+870
+15
+5
+War and Peace
+Leo Tolstoy
+1869
+Novel
+10
+1420
+15
