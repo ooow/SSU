@@ -1,0 +1,91 @@
+# кадр - все представленное изображение
+frame 0 0 800 400
+translate 400 50
+pushTransform
+# Small
+rotate 90
+translate 0 160
+figure
+#
+popTransform
+pushTransform
+rotate 60
+translate 0 160
+figure
+#
+popTransform
+pushTransform
+rotate 30
+translate 0 160
+figure
+#
+popTransform
+pushTransform
+translate 0 160
+figure
+#
+popTransform
+pushTransform
+rotate -30
+translate 0 160
+figure
+#
+popTransform
+pushTransform
+rotate -60
+translate 0 160
+figure
+#
+popTransform
+pushTransform
+rotate -90
+translate 0 160
+figure
+# Normall
+popTransform
+pushTransform
+rotate 90
+scale 2
+translate 5 120
+figure
+#
+popTransform
+pushTransform
+rotate 45
+scale 2
+translate 0 120
+figure
+#
+popTransform
+pushTransform
+scale 2
+translate 0 120
+figure
+#
+popTransform
+pushTransform
+rotate -45
+scale 2
+translate 0 120
+figure
+#
+popTransform
+pushTransform
+rotate -90
+scale 2
+translate -5 120
+figure
+# Big
+popTransform
+pushTransform
+rotate 50
+translate 0 360
+scale 3
+figure
+#
+popTransform
+pushTransform
+rotate -50
+translate 0 360
+scale 3
+figure

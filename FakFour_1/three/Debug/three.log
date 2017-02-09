@@ -1,0 +1,68 @@
+﻿Build started 23.10.2015 19:40:56.
+     1>Project "D:\Users\Гога\Documents\Visual Studio 2008\Projects\Fakfour\three\three.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\three.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         Deleting file "Debug\three.pch".
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\three.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt stdafx.cpp /clr:nostdlib 
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\three.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt AssemblyInfo.cpp Clip.cpp NewClip.cpp PClip.cpp three.cpp Transform.cpp /clr:nostdlib 
+         AssemblyInfo.cpp
+         Clip.cpp
+         NewClip.cpp
+     1>NewClip.cpp(34): warning C4305: 'argument' : truncation from 'double' to 'float'
+         PClip.cpp
+         three.cpp
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(227): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(228): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(229): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(230): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(289): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(294): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(299): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(304): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(337): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(337): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(337): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(342): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(342): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(342): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(347): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(352): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(357): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(358): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(358): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(363): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(364): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(364): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(369): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(370): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(375): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(376): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(381): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(382): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(387): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\Form1.h(388): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>three.cpp(18): error C2976: 'std::tr1::array' : too few template arguments
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\array(18) : see declaration of 'std::tr1::array'
+     1>three.cpp(18): error C3699: '^' : cannot use this indirection on type 'std::tr1::array'
+                 compiler replacing '^' with '*' to continue parsing
+     1>three.cpp(18): error C2664: 'main' : cannot convert parameter 1 from 'int' to 'std::tr1::array *'
+                 Conversion from integral type to pointer type requires reinterpret_cast, C-style cast or function-style cast
+         Transform.cpp
+     1>Transform.cpp(82): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Transform.cpp(83): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Transform.cpp(87): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Transform.cpp(88): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Transform.cpp(93): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Transform.cpp(98): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Transform.cpp(103): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Transform.cpp(108): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         Generating Code...
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\newclip.cpp(87): warning C4715: 'newclip' : not all control paths return a value
+     1>d:\users\гога\documents\visual studio 2008\projects\fakfour\three\clip.cpp(422): warning C4715: 'clip' : not all control paths return a value
+     1>Done Building Project "D:\Users\Гога\Documents\Visual Studio 2008\Projects\Fakfour\three\three.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:11.27
