@@ -97,7 +97,7 @@
                 </form>
             </td>
             <td>
-                <form class="form1" action="/searchbyyear" method="get">
+                <form class="form1" action="/search-by-year" method="get">
                     <p>
                         <input class="input" type="text" id="year" name="year" placeholder="2016">
                         <input class="btn" type="submit" value="Поиск по году"/>
