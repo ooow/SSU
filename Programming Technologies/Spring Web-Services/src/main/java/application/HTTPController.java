@@ -12,6 +12,7 @@ import search.LuceneSearch;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 public class HTTPController {
@@ -63,7 +64,7 @@ public class HTTPController {
     }
 
     @RequestMapping(value = "/search-by-year", method = RequestMethod.GET)
-    public ModelAndView searchByYear(@RequestParam(name = "year", required = false, defaultValue = "1") String yearr) {
+    public ModelAndView searchByYear(@RequestParam(name = "year", required = false, defaultValue = "2016") String yearr) {
         ModelAndView mv = new ModelAndView("/home");
         int year = 0;
         try {
@@ -118,5 +119,61 @@ public class HTTPController {
             films.add(film);
         }
         return films.toString();
+    }
+
+    @RequestMapping(value = "/graph", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView makeGraph(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView("/home");
+        String sYear = request.getParameter("syear");
+        String eYear = request.getParameter("eyear");
+        int sy = 2010;
+        int ey = 2016;
+        try {
+            sy = Integer.parseInt(sYear);
+            ey = Integer.parseInt(eYear);
+        } catch (NumberFormatException e) {
+            String erroreMessage = "Пожалуйста введите год - целое число!";
+            mv.addObject("errorMessage", erroreMessage);
+        }
+
+        if (sy > ey) {
+            sy = sy + ey;
+            ey = sy - ey;
+            sy = sy - ey;
+        }
+
+        String xAxis = "";
+        for (int i = sy; i <= ey; i++) {
+            xAxis += "'" + i + "',";
+        }
+        xAxis = xAxis.substring(0, xAxis.length() - 1);
+        mv.addObject("xAxis", xAxis);
+
+        String data = "data";
+        int k = 1;
+        for (int i = 0; i < 10; i++) {
+            ArrayList<Document> films = searcher.searchByRatingOne(i, i + 1);
+            HashMap<Integer, Integer> map = new HashMap<>();
+            for (int j = sy; j <= ey; j++) {
+                map.put(j, 0);
+            }
+            for (int j = 0; j < films.size(); j++) {
+                int year = Integer.valueOf(films.get(j).get("year"));
+                if (map.containsKey(year)) {
+                    int kk = map.get(year);
+                    kk++;
+                    map.put(year, kk);
+                }
+            }
+            String result = "";
+            for (int j = sy; j <= ey; j++) {
+                result += map.get(j) + ",";
+            }
+            result = result.substring(0, result.length() - 1);
+            mv.addObject(data + k, result);
+            k++;
+        }
+        mv.addObject("showGraph", 1);
+        return mv;
     }
 }
