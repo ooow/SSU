@@ -98,4 +98,22 @@ public class LuceneSearch {
         }
         return docs;
     }
+
+    public ArrayList<Document> searchByRatingOne(double sR, double eR) {
+        ArrayList<Document> docs = new ArrayList<>();
+        while (sR < eR) {
+            sR = Math.round((sR + 0.01) * 100.0) / 100.0;
+            try {
+                TopDocs hits = search(sR + "", "rating");
+                if (hits.totalHits > 0) {
+                    for (ScoreDoc scoreDoc : hits.scoreDocs) {
+                        docs.add(getDocument(scoreDoc));
+                    }
+                }
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return docs;
+    }
 }
