@@ -35,7 +35,7 @@
     }
 
     body {
-        background-color: white;
+          background-color: #fffefe;
     }
 
     .element {

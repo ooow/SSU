@@ -85,19 +85,9 @@ public class HTTPController {
     public String getTop(@RequestParam(value = "rating", required = false, defaultValue = "1") String findRating) {
         double rating = Double.valueOf(findRating) - 0.01;
         ArrayList<Document> topfilms = searcher.searchByRating(rating, "1");
-        ArrayList<JSONObject> films = new ArrayList<>();
-        for (int i = 0; i < topfilms.size(); i++) {
-            JSONObject film = new JSONObject();
-            film.put("img", topfilms.get(i).get("img"));
-            film.put("href", topfilms.get(i).get("href"));
-            film.put("rating", topfilms.get(i).get("rating"));
-            film.put("title", topfilms.get(i).get("name"));
-            film.put("year", topfilms.get(i).get("year"));
-            films.add(film);
-        }
+        ArrayList<JSONObject> films = docToJson(topfilms);
         return films.toString();
     }
-
 
     @RequestMapping(value = "/get-by-year", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -108,16 +98,7 @@ public class HTTPController {
         } catch (NumberFormatException e) {
         }
         ArrayList<Document> filmsByYear = searcher.searchByYear(year);
-        ArrayList<JSONObject> films = new ArrayList<>();
-        for (int i = 0; i < filmsByYear.size(); i++) {
-            JSONObject film = new JSONObject();
-            film.put("img", filmsByYear.get(i).get("img"));
-            film.put("href", filmsByYear.get(i).get("href"));
-            film.put("rating", filmsByYear.get(i).get("rating"));
-            film.put("title", filmsByYear.get(i).get("name"));
-            film.put("year", filmsByYear.get(i).get("year"));
-            films.add(film);
-        }
+        ArrayList<JSONObject> films = docToJson(filmsByYear);
         return films.toString();
     }
 
@@ -175,5 +156,19 @@ public class HTTPController {
         }
         mv.addObject("showGraph", 1);
         return mv;
+    }
+
+    public ArrayList<JSONObject> docToJson(ArrayList<Document> topfilms) {
+        ArrayList<JSONObject> films = new ArrayList<>();
+        for (int i = 0; i < topfilms.size(); i++) {
+            JSONObject film = new JSONObject();
+            film.put("img", topfilms.get(i).get("img"));
+            film.put("href", topfilms.get(i).get("href"));
+            film.put("rating", topfilms.get(i).get("rating"));
+            film.put("title", topfilms.get(i).get("name"));
+            film.put("year", topfilms.get(i).get("year"));
+            films.add(film);
+        }
+        return films;
     }
 }

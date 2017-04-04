@@ -23,7 +23,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo(
+        return new ApiInfo(
                 "TOP FILMS API",
                 "API for RESTful web-service top films dot com :)",
                 "1.0",
@@ -31,7 +31,6 @@ public class SwaggerConfig {
                 "tirkiya@icloud.com",
                 "Top Films",
                 "http://localhost:8080/home");
-        return apiInfo;
     }
 
 }
